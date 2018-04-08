@@ -1,0 +1,41 @@
+HBase学习笔记：
+	
+	HBase简介：
+	HBase是一个开源的非关系型分布式数据库（NOSQL）,他参考了谷歌的BigTable建模，实现的编程语言为JAVA，运行与HDFS文件系统上，为Hadoop提供类似于BigTable规模的服务。可以存储海量稀疏数据，具备一定的容错性、高可靠性以及伸缩性，主要应用场景是实时随机读写超大规模的数据。
+	HBase的表能够作为MapReduce任务的输入和输出。可以通过Java API来存取数据，也可以通过Rest(一组架构约束条件和原则)、Avro（数据序列化系统）或者Thrift（可扩展且跨语言的服务开发软件框架）的API来访问。
+	他不能取代RDBMS(关系数据库管理系统，常见的有oracle、SQL Server等)，因为二者的应用场景不一样。HBase为了解决海量数据的扩展性，支持简单的增加结点来实现线性扩展，从而在集群上管理海量的非结构化或半结构化的稀疏数据，HBase仅能通过主键或主键的range检索数据，支持单行事物。
+	HBase位于结构化存储层，Hadoop HDFS为HBase提供了高可靠性的底层存储支持，Hadoop MapReduce为HBase提供了高性能的计算能力，Zookeeper为HBase提供了稳定的服务和failover机制（错误溢出）。Hive和Pig为HBase提供了高层语言支持，使得在HBase提供了方便的RDBMS数据导入功能，使得传统数据库数据向HBase中迁移十分便捷。
+	
+	HBase数据模型：
+	row-key=>{
+		cf1:column-key1:value1,
+		cf1:column-key2:value2,
+		cf2:column-key3:value3,
+		cf2:column-key1:value4,
+	}
+	a.行键（row-key）：表的主键，表中的记录默认按照行键升序排序
+	b.时间戳（Timestamp）：每次数据操作对应的时间戳，可以看做是数据的版本号
+	c.列族（Column Family）：表在水平方向有一个或者多个列族组成，一个列族中可以由任意多个列组成，列族支持动态扩展，无需预先定义列的数量以及类型，所有的列均以二进制格式存储，用户需要自行进行类型转换，所有的列族成员的前缀是相同的，如cf1:column-key1:value1,cf1:column-key2:value2他们属于cf1这个列族。
+	d.表和区域（Table&Region）:当表随着记录数不断增加而变大后，会逐渐分裂成多份，成为区域，一个区域是对表的水平划分，不同的区域会被master分配给相应的RegionServer进行管理。
+	
+	HBase架构中只有一个Master节点，称HMaster，有多台RegionServer成为HRegionServer,每一个HRegionServer中包含多个region。
+	1.HBase访问接口：Java、REST、Thrift等
+	2.Master:集群管理服务器，为RegionServer分配Region，负责RegionServer的负载均衡，处理schema更新请求。
+	3.RegionServer：管理HBase的数据存储，维护Region，处理IO请求。
+	4.Zookeeper：保证集群的高可用性、储存Region的寻址入口，并实时监控RegionServer的状态，存储HBase的Schema。
+
+	访问接口:
+	1.Native Java API：最常规和高效的访问方式，适合Hadoop MapReduce Job并行批处理HBase表数据。
+	2.HBase Shell：HBase的命令行工具，最简单的接口，适合HBase管理使用
+	3.Thrift Gateway:利用Thrift序列化技术，支持C++,PHP,Python等多种语言，适合其他的异构系统在线访问HBase表数据。
+	4.REST Dateway:支持REST风格的Http API访问HBase，接触了语言显示。
+	5.pig，可以使用Pig Latin流式编程语言，来操作HBase中的数据，和Hive类似，本质最终也是编译成MapReduce Job来处理HBase表数据，适合做数据统计。
+	6.Hive,可以使用类似SQL语言来访问HBase.
+	
+	HBase存储格式：所有数据文件存储在Hadoop HDFS文件系统上，主要包括：
+	a.HFile，HBase中的KeyValue数据的存储格式，HFile是hadoop的二进制文件。
+	b.HLogFile，HBase中WAL的存储格式，物理上是hadoop的Sequence File.
+
+	HBase的优点：1.海量数据存储，2.快速随机访问，3.大量写操作应用。
+	常见应用场景：1.互联网搜索引擎数据存储，2.审计日志系统，3.实时系统，4.消息中心，5.内容服务系统。
+	
