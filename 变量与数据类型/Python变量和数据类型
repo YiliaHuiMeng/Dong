@@ -1,0 +1,13 @@
+变量和数据类型笔记：
+	1.关键字：False def if raise None del import return True elif in try and else is  while as except lambda assert finally nonlocal yield break for not class from or continue global pass
+
+	2.变量指定
+	在python中我们不需要为变量指定数据类型，只需要输入变量名和值，它也能操作字符串，需要用单双引号括起来。
+
+	3.从键盘读取输入
+	在Python中，使用函数input()函数，在这个函数中，有一个用于打印在屏幕上的可选字符串参数，返回用户输入的字符串。
+
+	4.单行定义多个变量或赋值
+	如：a,b = b,a
+	我们常用逗号创建元组，在赋值语句右边，我们创建元组被称为元组封装，赋值语句左边成为元组拆封。
+	

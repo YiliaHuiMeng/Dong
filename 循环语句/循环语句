@@ -1,0 +1,12 @@
+while循环：
+	1.语法：
+	while condition:
+		statement1
+		statement2
+	想要执行多次的代码，必须一正确的缩进放在while语句下。在表达式condition为真的时候他们才会执行。
+
+斐波那契（Fibonacci）数列：
+	这个数列为：1 1 2 3 5 8 13 ……  即前两项的和为第三项
+
+幂级函数：
+	计算：e^x = 1 + x + x^2/2! +x^3/3!……

@@ -1,0 +1,6 @@
+while循环：
+	1.语法：
+	while condition:
+		statement1
+		statement2
+	想要执行多次的代码，必须一正确的缩进放在while语句下。在表达式condition为真的时候他们才会执行。

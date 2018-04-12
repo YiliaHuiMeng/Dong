@@ -1,0 +1,12 @@
+if 语句：
+	1.语法：
+	if expression:
+		do this
+	当expression的值为真（不为0的任何值都为真），程序执行缩进后的内容，需要正确的缩进，为真时，将后执行所有的缩进内容。
+	一般采用较好的方式为：
+	 if x:
+		pass
+	而不是：
+	if x == true:
+		pass
+
