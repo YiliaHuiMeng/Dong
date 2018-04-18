@@ -1,0 +1,19 @@
+异常：
+	1.在首行多打了一个空格就会产生：IndentationError
+	2.当有人试图访问一个未定义的变量则会发生NameError,最后一行包含了错误的详细信息，其余行显示它是如何发生的详细信息。
+	3.TypeError指的是当操作或函数应用于不适当类型的对象时引发，一个常见的例子就是对整数和字符串做加法。
+
+	4.处理异常：通常使用try……except块来处理任意异常。
+	基本语法
+	try:
+		statements to be inside try clause
+		statement2
+		statement3
+		...
+	except ExcetionName:
+		statements to evaluated in case of ExceptionName happens
+
+	5.抛出异常
+	使用raise语句抛出异常
+
+	6.
