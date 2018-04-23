@@ -1,0 +1,29 @@
+	1.模块包括python定义和声明的文件。文件名为模块名加上.py后缀。可以由全局变量__name__得到模块名。
+	2.导入模块：
+	a.import 模块名
+	b.from module import *-->不推荐做法
+	
+	3.包
+	含有__init__.py文件的目录可以用来作为一个包，目录里所有的.py文件都是这个包的子模块。
+	如果__init__.py文件内有一个名为__all__的列表，那么只有在列表内列出的名字将会被公开。
+	如果mymodule内的__init__.py文件含有以下内容：
+	from mymodule.bars import simplebar
+	__all__ = [simplebar, ]
+	那么导入时只有simplebar可以用
+	from mymodule import *只能工作在模块级别的对象上，试图导入函数或类将导致syntax error
+
+	4.默认模块
+	利用help()函数查找任何模块/类的文档，如果想知道字符串所有可用的方法，可用help(str)
+	4.1.os模块
+	os提供了与操作系统相关的功能
+	getuid()函数返回当前进程的有效用户id
+	getpid()函数返回当前进程的id。getppid()返回父进程的id.
+	
+	4.2.Requests模块
+	Requests是一个第三方python模块，需要使用pip3安装
+
+	4.3.argparse命令行参数处理模块
+	ls命令中用到的模块是sys，命令行传入的所有参数都可以使用sys.argv获取。
+
+	5.TAB补全
+	
